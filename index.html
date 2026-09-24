@@ -73,7 +73,7 @@ body.ready .card{transition-delay:.2s}
 
 /* scroll reveal */
 .card > p,.card > blockquote,.card > .broadcast,.card > .heartline,.card > .cute,
-.card > .wait,.card > .final,.photo,.caption,.sign,.ghost{
+.card > .wait,.card > .final,.card > .meaning-turn,.card > .bio-note,.photo,.caption,.sign,.ghost{
  opacity:0;transform:translateY(24px);filter:blur(5px);
  transition:opacity .75s ease,transform .75s cubic-bezier(.2,.75,.25,1),filter .75s ease}
 .card > .seen,.photo.seen,.caption.seen,.sign.seen,.ghost.seen{
@@ -168,9 +168,47 @@ body.ready .card{transition-delay:.2s}
 .meaning-reveal.opened .meaning-cover{opacity:0;transform:translateY(-12px)}
 .meaning-reveal.opened .meaning-answer{opacity:1;transform:scale(1)}
 
+
+/* 9 PM dramatic beat */
+.nine-burst{position:fixed;inset:0;z-index:94;pointer-events:none;overflow:hidden}
+.nine-particle{position:fixed;opacity:0;font-size:18px;will-change:transform,opacity;
+ animation:ninePop 1.15s cubic-bezier(.15,.7,.2,1) forwards}
+@keyframes ninePop{
+ 0%{opacity:0;transform:translate(-50%,-50%) scale(.25)}
+ 12%{opacity:1}
+ 100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) rotate(var(--rot)) scale(1.18)}
+}
+.broadcast.shake-now{
+ animation:nineShake .72s cubic-bezier(.36,.07,.19,.97) both !important;
+}
+@keyframes nineShake{
+ 10%,90%{transform:translateX(-3px) rotate(-.25deg)}
+ 20%,80%{transform:translateX(6px) rotate(.3deg)}
+ 30%,50%,70%{transform:translateX(-10px) rotate(-.35deg)}
+ 40%,60%{transform:translateX(10px) rotate(.35deg)}
+}
+.broadcast.nine-glow{
+ text-shadow:0 0 12px rgba(255,255,255,.25),0 0 34px rgba(255,75,120,.72),0 0 70px rgba(139,24,57,.45);
+}
+
+
+.meaning-turn{text-align:center;margin:2.6rem 0;font-size:1.05rem;color:#d7a6b5}
+.meaning-turn strong{display:inline-block;margin-top:.35rem;font-size:1.55rem;color:#ffd1df;text-shadow:0 0 24px rgba(255,95,140,.3)}
+.bio-note{margin:2rem auto 2.8rem;max-width:480px;padding:20px 18px;text-align:center;border-radius:18px;
+ border:1px solid rgba(255,140,171,.28);background:rgba(214,59,97,.07);box-shadow:inset 0 0 30px rgba(214,59,97,.035)}
+.bio-note .bio-label{display:block;margin-bottom:8px;font-size:.7rem;letter-spacing:.16em;color:#9e8790}
+.bio-note strong{font-size:1.13rem;color:#ffd4df}
+
 </style>
+
+<script>
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.scrollTo(0,0);
+window.addEventListener('pageshow', function(){ window.scrollTo(0,0); });
+</script>
+
 </head>
-<body class="locked"><div class="progress" id="progress"></div><div class="end-burst" id="endBurst"></div>
+<body class="locked"><div class="progress" id="progress"></div><div class="nine-burst" id="nineBurst"></div><div class="end-burst" id="endBurst"></div>
 <div class="secret-intro" id="secretIntro">
   <div class="envelope-wrap">
     <div class="secret-note">SECRET LETTER · FOR RUCHEL ONLY</div>
@@ -238,7 +276,14 @@ body.ready .card{transition-delay:.2s}
  <span class="meaning-answer">없어.</span>
 </div>
 <p>진짜 아무 의미 없음 ㅋㅋㅋㅋㅋㅋㅋㅋ 🍓💀</p>
-<p>근데 그걸 발견했다는 건 루체리 진짜 내 방송국 여기저기 구경하고 다닌 거잖아?</p>
+<div class="meaning-turn">...이었는데,<br><strong>이제 의미 생겼어.</strong></div>
+<p>루체리가 또 내 방송국 구경하러 올지도 모르니까<br>아까 그 의미 없던 소개글 자리는 바꿔놨어 ㅋㅋㅋ</p>
+<div class="bio-note">
+  <span class="bio-label">SOOP 소개글</span>
+  <strong>루체리 또 몰래 구경왔지? 🍓</strong>
+</div>
+<p>여기까지 다시 찾아왔다면 이미 봤으려나? ㅋㅋㅋ</p>
+<p>근데 그걸 처음 발견했다는 것부터가 루체리 진짜 내 방송국 여기저기 구경하고 다닌 거잖아?</p>
 <p><strong>나 알아갈 기회 달라고 하더니 벌써 탐방하고 있었네 루체리?ㅋㅋㅋ ♥️</strong></p>
 
 <p>대신 어제는 소통도 재밌었고 종겜 핀볼 하는 것도 재밌게 봤어.</p>
@@ -286,6 +331,7 @@ function openLetter(){
  env.classList.add('open');
  setTimeout(()=>{
    intro.classList.add('opened');
+   window.scrollTo({top:0,left:0,behavior:'instant'});
    document.body.classList.remove('locked');
    document.body.classList.add('ready');
    setTimeout(()=>intro.remove(),1000);
@@ -324,12 +370,40 @@ addEventListener('scroll',()=>{
  progress.style.width=(max>0?(scrollY/max)*100:0)+'%';
 },{passive:true});
 
-// "9시잖아" shakes once when revealed
+// "9시잖아" — shake + particle burst, once per page load
 const bc=document.querySelector('.broadcast');
+const nineBurst=document.getElementById('nineBurst');
+let ninePlayed=false;
+function playNineMoment(){
+ if(ninePlayed || !bc) return;
+ ninePlayed=true;
+ bc.classList.remove('shake-now');
+ void bc.offsetWidth;
+ bc.classList.add('shake-now','nine-glow');
+ const rect=bc.getBoundingClientRect();
+ const cx=rect.left+rect.width/2, cy=rect.top+rect.height/2;
+ const syms=['💀','🍓','♥','💀','♡','🍓'];
+ for(let i=0;i<22;i++){
+   const el=document.createElement('span');
+   el.className='nine-particle';
+   el.textContent=syms[i%syms.length];
+   el.style.left=cx+'px'; el.style.top=cy+'px';
+   const a=(Math.PI*2*i/22)+(Math.random()*.28);
+   const d=55+Math.random()*135;
+   el.style.setProperty('--dx',Math.cos(a)*d+'px');
+   el.style.setProperty('--dy',Math.sin(a)*d+'px');
+   el.style.setProperty('--rot',((Math.random()*220)-110)+'deg');
+   el.style.animationDelay=(Math.random()*.10)+'s';
+   nineBurst.appendChild(el);
+   setTimeout(()=>el.remove(),1500);
+ }
+ setTimeout(()=>bc.classList.remove('nine-glow'),1100);
+ if(navigator.vibrate) navigator.vibrate([25,30,25]);
+}
 if(bc){
  const shakeObs=new IntersectionObserver(es=>es.forEach(e=>{
-  if(e.isIntersecting){setTimeout(()=>e.target.classList.add('shake-now'),380);shakeObs.disconnect()}
- }),{threshold:.65});
+   if(e.isIntersecting && e.intersectionRatio>=.45){setTimeout(playNineMoment,220);shakeObs.disconnect();}
+ }),{threshold:[.45,.7]});
  shakeObs.observe(bc);
 }
 
