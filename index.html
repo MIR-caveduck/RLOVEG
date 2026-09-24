@@ -161,6 +161,13 @@ body.ready .card{transition-delay:.2s}
   100%{box-shadow:0 20px 65px rgba(0,0,0,.38)}
 }
 
+
+.meaning-reveal{margin:2.2rem auto 2.6rem;min-height:105px;max-width:440px;display:grid;place-items:center;position:relative;overflow:hidden;border:1px dashed rgba(255,140,171,.45);border-radius:18px;background:linear-gradient(135deg,rgba(139,24,57,.10),rgba(23,27,49,.8));cursor:pointer;text-align:center;transition:.55s ease}
+.meaning-cover{color:#d9a4b4;font-size:.83rem;transition:.45s ease}
+.meaning-answer{position:absolute;font-size:clamp(2.6rem,11vw,4.7rem);font-weight:900;color:#fff;opacity:0;transform:scale(.45) rotate(-7deg);text-shadow:0 0 28px rgba(255,95,140,.45);transition:.55s cubic-bezier(.2,.8,.2,1)}
+.meaning-reveal.opened .meaning-cover{opacity:0;transform:translateY(-12px)}
+.meaning-reveal.opened .meaning-answer{opacity:1;transform:scale(1)}
+
 </style>
 </head>
 <body class="locked"><div class="progress" id="progress"></div><div class="end-burst" id="endBurst"></div>
@@ -218,10 +225,22 @@ body.ready .card{transition-delay:.2s}
 <p>생각해보니까 이것도 뭔가에 빠지면 그것만 보는 거랑 똑같네 ㅋㅋㅋ</p>
 <p>그러니까 루체리도 앞으로 천천히 하나씩 알아가면 되지 않을까.</p>
 <p>나도 계속 루체리 알아가는 중이니까 🍓♥️</p>
-<p>아 그리고 어제 방송에서 새롭게 뭘 알아갔냐고 물어봤지?</p>
-<p>뿡뿡뿡뿡뿡은...</p>
-<p>나도 모르겠어.</p>
-<p>그건 내가 루체리한테 다시 물어봐야 할 것 같은데?ㅋㅋㅋㅋ 💀</p>
+
+<div class="secret-divider">THE MYSTERY OF 뿡뿡뿡뿡뿡</div>
+<p>아 그리고 뿡뿡뿡뿡뿡이 뭔지 나도 한참 생각했거든?</p>
+<p><strong>방금 알았어 ㅋㅋㅋㅋㅋㅋㅋㅋㅋ</strong></p>
+<p>아니 루체리 그거 <strong>내 방송국 소개글이잖아ㅋㅋㅋㅋㅋㅋ</strong> 💀</p>
+<p>나는 또 어제 방송에서 내가 뭔가 이상한 말을 했나,<br>내가 기억 못 하는 무언가가 있었나 진지하게 고민하고 있었는데...</p>
+<p>그냥 내 방송국에 떡하니 적혀 있었네 ㅋㅋㅋㅋ</p>
+<p>그리고 가장 중요한<br><strong>뿡뿡뿡뿡뿡의 의미는...</strong></p>
+<div class="meaning-reveal" id="meaningReveal" tabindex="0" role="button">
+ <span class="meaning-cover">의미를 확인하려면 눌러봐 🍓</span>
+ <span class="meaning-answer">없어.</span>
+</div>
+<p>진짜 아무 의미 없음 ㅋㅋㅋㅋㅋㅋㅋㅋ 🍓💀</p>
+<p>근데 그걸 발견했다는 건 루체리 진짜 내 방송국 여기저기 구경하고 다닌 거잖아?</p>
+<p><strong>나 알아갈 기회 달라고 하더니 벌써 탐방하고 있었네 루체리?ㅋㅋㅋ ♥️</strong></p>
+
 <p>대신 어제는 소통도 재밌었고 종겜 핀볼 하는 것도 재밌게 봤어.</p>
 <p>루체리가 좋아할 것 같은 게임들로 나름 추천해봤는데 정작 다른 게임들이 걸려버린 건 좀 아쉽긴 했지만ㅋㅋㅋ 그래도 하나하나 조금씩 앞으로 나아가는 거 보고 있으니까 괜히 나까지 응원하게 되더라.</p>
 <p>그리고 중간중간 열심히 올라가다가 다시 떨어졌을 때...<br>갑자기 침울해진 루체리 표정 있잖아.</p>
@@ -340,6 +359,14 @@ if(finalEl){
   if(e.isIntersecting){setTimeout(fireEnding,700);endObs.disconnect()}
  }),{threshold:.72});
  endObs.observe(finalEl);
+}
+
+
+const meaningReveal=document.getElementById('meaningReveal');
+if(meaningReveal){
+ const revealMeaning=()=>{meaningReveal.classList.add('opened');if(navigator.vibrate)navigator.vibrate([18,30,18]);};
+ meaningReveal.addEventListener('click',revealMeaning);
+ meaningReveal.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();revealMeaning();}});
 }
 
 </script>
