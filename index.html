@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>루체리에게 — 09.24</title>
+<style>
+:root{--bg:#070912;--card:#101321;--ink:#f6eef3;--muted:#aaa4b2;--wine:#8b1839;--red:#d63b61;--pink:#ff8cab;--navy:#171b31;}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:
+radial-gradient(circle at 15% 8%,rgba(139,24,57,.22),transparent 30rem),
+radial-gradient(circle at 90% 45%,rgba(58,67,119,.18),transparent 30rem),
+var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Noto Sans KR",sans-serif;line-height:1.95;word-break:keep-all}
+main{width:min(760px,100%);margin:auto;padding:42px 18px 80px}
+.hero{text-align:center;padding:44px 14px 52px}
+.kicker{font-size:.76rem;letter-spacing:.22em;color:#d49aac;text-transform:uppercase}
+h1{font-size:clamp(2rem,8vw,3.6rem);margin:.35rem 0 .7rem;letter-spacing:-.04em}
+.hero p{color:var(--muted);margin:0}
+.rule{width:46px;height:1px;background:linear-gradient(90deg,transparent,var(--pink),transparent);margin:24px auto}
+.card{position:relative;background:linear-gradient(180deg,rgba(19,22,37,.94),rgba(10,12,22,.96));border:1px solid rgba(255,120,158,.24);border-radius:28px;padding:clamp(25px,6vw,52px);box-shadow:0 22px 70px rgba(0,0,0,.38),inset 0 0 50px rgba(120,20,55,.04)}
+.card:before{content:"🍓";position:absolute;top:-17px;left:26px;background:var(--bg);padding:0 10px;font-size:1.35rem}
+p{margin:0 0 1.55rem}
+blockquote{margin:2rem 0;padding:17px 20px;border-left:3px solid var(--red);background:rgba(214,59,97,.07);border-radius:0 15px 15px 0;font-weight:700}
+.broadcast,.heartline,.cute,.wait,.final{text-align:center;margin:3.3rem -8px;font-weight:800}
+.broadcast{font-size:clamp(2rem,10vw,4rem);color:#fff;text-shadow:0 0 25px rgba(255,75,120,.42);letter-spacing:-.05em}
+.heartline{font-size:1.28rem;color:#ffc2d2}
+.cute{font-size:1.7rem}
+.wait{font-size:1.65rem;color:#ffd6e1;margin-bottom:.2rem}
+.wait.small{font-size:1rem;color:var(--muted);margin-top:.1rem}
+.break{text-align:center;color:#c46a84;letter-spacing:.8em;margin:3rem 0}
+.photo{margin:38px -10px 8px;overflow:hidden;border-radius:22px;border:1px solid rgba(255,255,255,.1);background:#090b12}
+.photo img{display:block;width:100%;height:auto}
+.caption{text-align:center;color:var(--muted);font-size:.78rem;margin-top:10px}
+.final{margin:4.5rem -8px 1rem;padding:32px 14px;border-top:1px solid rgba(255,140,171,.25);border-bottom:1px solid rgba(255,140,171,.25);font-size:clamp(1.12rem,4.8vw,1.45rem);line-height:2;color:#ffd3df}
+.sign{text-align:center;margin:38px 0 5px;color:#d9a3b2;font-family:Georgia,serif;font-style:italic}
+.ghost{text-align:center;font-size:1.6rem;opacity:.8;margin-top:10px}
+@media(max-width:480px){main{padding-left:12px;padding-right:12px}.card{border-radius:22px}body{line-height:1.88}}
+
+/* secret letter intro */
+body.locked{overflow:hidden}
+.secret-intro{position:fixed;inset:0;z-index:99;display:grid;place-items:center;
+ background:radial-gradient(circle at 50% 35%,rgba(139,24,57,.24),transparent 36rem),#070912;
+ transition:opacity .9s ease,visibility .9s ease}
+.secret-intro.opened{opacity:0;visibility:hidden;pointer-events:none}
+.envelope-wrap{text-align:center;perspective:1100px;padding:24px}
+.secret-note{color:#d8a9b7;font-size:.78rem;letter-spacing:.18em;margin-bottom:22px;
+ animation:breathe 2.4s ease-in-out infinite}
+.envelope{position:relative;width:min(82vw,390px);aspect-ratio:1.55/1;background:#171a29;
+ border:1px solid rgba(255,142,174,.35);border-radius:10px;cursor:pointer;
+ box-shadow:0 28px 80px rgba(0,0,0,.55),0 0 35px rgba(157,29,67,.14);
+ transform-style:preserve-3d;transition:transform .7s ease}
+.envelope:hover{transform:translateY(-4px)}
+.envelope:before,.envelope:after{content:"";position:absolute;inset:0;pointer-events:none}
+.envelope:before{clip-path:polygon(0 0,50% 58%,100% 0);background:#25283b;transform-origin:top;
+ transition:transform 1s cubic-bezier(.2,.75,.2,1);z-index:4}
+.envelope:after{clip-path:polygon(0 100%,0 0,50% 58%,100% 0,100% 100%);background:#111522;z-index:2}
+.envelope.open:before{transform:rotateX(180deg)}
+.letter-peek{position:absolute;left:7%;right:7%;bottom:7%;height:78%;border-radius:8px;
+ background:linear-gradient(#f5edf0,#e9dde2);z-index:1;transition:transform 1.05s .45s cubic-bezier(.18,.8,.2,1);
+ display:grid;place-items:center;color:#5d2a3a;font-family:Georgia,serif}
+.envelope.open .letter-peek{transform:translateY(-62%)}
+.seal{position:absolute;z-index:5;left:50%;top:53%;transform:translate(-50%,-50%);
+ width:58px;height:58px;border-radius:50%;display:grid;place-items:center;
+ background:radial-gradient(circle at 35% 30%,#e45a79,#8b1839 70%);color:#fff;
+ box-shadow:0 5px 18px rgba(0,0,0,.35);font-size:1.25rem;transition:.5s}
+.envelope.open .seal{opacity:0;transform:translate(-50%,-50%) scale(.5)}
+.tap{margin-top:22px;color:#918c9a;font-size:.8rem}
+
+/* content entrance */
+.hero,.card{opacity:0;transform:translateY(22px)}
+body.ready .hero,body.ready .card{opacity:1;transform:none;transition:opacity 1s ease,transform 1s ease}
+body.ready .card{transition-delay:.2s}
+
+/* scroll reveal */
+.card > p,.card > blockquote,.card > .broadcast,.card > .heartline,.card > .cute,
+.card > .wait,.card > .final,.photo,.caption,.sign,.ghost{
+ opacity:0;transform:translateY(24px);filter:blur(5px);
+ transition:opacity .75s ease,transform .75s cubic-bezier(.2,.75,.25,1),filter .75s ease}
+.card > .seen,.photo.seen,.caption.seen,.sign.seen,.ghost.seen{
+ opacity:1;transform:none;filter:none}
+.card > p:nth-of-type(4n+1).seen{transition-delay:.05s}
+
+/* secret ink accent */
+.secret-ink{position:relative;cursor:pointer;border-bottom:1px dashed rgba(255,140,171,.5)}
+.secret-ink:after{content:"비밀잉크";position:absolute;left:50%;bottom:120%;transform:translateX(-50%);
+ font-size:.65rem;color:#ffadc3;opacity:0;transition:.3s;white-space:nowrap}
+.secret-ink:hover:after{opacity:1}
+
+.floating-symbol{position:fixed;z-index:-1;opacity:.13;animation:floatUp linear infinite;pointer-events:none}
+@keyframes floatUp{from{transform:translateY(110vh) rotate(0)}to{transform:translateY(-20vh) rotate(20deg)}}
+@keyframes breathe{50%{opacity:.45}}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}.card>*{opacity:1!important;transform:none!important;filter:none!important}}
+
+/* DELUXE interactions */
+.redacted{
+ display:inline-block;position:relative;color:transparent!important;
+ background:linear-gradient(90deg,#090a10,#202231,#090a10);
+ border-radius:5px;padding:0 .3em;cursor:pointer;user-select:none;
+ box-shadow:inset 0 0 0 1px rgba(255,255,255,.04);
+ transition:.65s ease;
+}
+.redacted:before{content:"TAP TO REVEAL";position:absolute;inset:0;display:grid;place-items:center;
+ color:#c890a1;font-size:.62rem;letter-spacing:.12em;font-weight:700}
+.redacted.revealed{color:#ffd1df!important;background:rgba(214,59,97,.08);user-select:text}
+.redacted.revealed:before{opacity:0}
+
+.broadcast.shake-now{animation:screenShake .48s cubic-bezier(.36,.07,.19,.97) both}
+@keyframes screenShake{
+ 10%,90%{transform:translateX(-2px) rotate(-.2deg)}
+ 20%,80%{transform:translateX(4px) rotate(.2deg)}
+ 30%,50%,70%{transform:translateX(-7px) rotate(-.3deg)}
+ 40%,60%{transform:translateX(7px) rotate(.3deg)}
+}
+.broadcast:after{content:"아직 멀었음 💀";display:block;font-size:.72rem;color:#a9a1af;
+ letter-spacing:.05em;margin-top:.5rem;text-shadow:none}
+
+.progress{position:fixed;left:0;top:0;height:2px;width:0;z-index:90;
+ background:linear-gradient(90deg,#8b1839,#ff8cab,#f6d0da);box-shadow:0 0 12px #d63b61}
+
+.end-burst{position:fixed;inset:0;pointer-events:none;z-index:95;overflow:hidden}
+.burst-item{position:absolute;left:50%;top:78%;font-size:20px;opacity:0;
+ animation:burst 1.65s cubic-bezier(.1,.7,.2,1) forwards}
+@keyframes burst{
+ 0%{opacity:0;transform:translate(-50%,-50%) scale(.4)}
+ 12%{opacity:1}
+ 100%{opacity:0;transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(1.15)}
+}
+.final{cursor:pointer;position:relative}
+.final:after{content:"♡";position:absolute;right:12px;bottom:8px;color:#ff8cab;
+ animation:heartBeat 1.8s ease-in-out infinite}
+@keyframes heartBeat{50%{transform:scale(1.35);opacity:.55}}
+
+.secret-divider{text-align:center;margin:3.4rem 0;color:#9c6375;font-size:.74rem;letter-spacing:.25em}
+.secret-divider:before,.secret-divider:after{content:"";display:inline-block;width:42px;height:1px;
+ vertical-align:middle;margin:0 12px;background:linear-gradient(90deg,transparent,#8b1839)}
+.secret-divider:after{transform:scaleX(-1)}
+
+@media(max-width:480px){
+ .redacted:before{font-size:.52rem}
+}
+
+</style>
+</head>
+<body class="locked"><div class="progress" id="progress"></div><div class="end-burst" id="endBurst"></div>
+<div class="secret-intro" id="secretIntro">
+  <div class="envelope-wrap">
+    <div class="secret-note">SECRET LETTER · FOR RUCHEL ONLY</div>
+    <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="비밀편지 열기">
+      <div class="letter-peek"><div>To. 루체리<br><small>09.24 · AM 08:21</small></div></div>
+      <div class="seal">🍓</div>
+    </div>
+    <div class="tap">편지를 눌러 열어봐 🍓💀</div>
+  </div>
+</div>
+<main>
+<section class="hero">
+<div class="kicker">09.24 · AM 08:21</div>
+<h1>출근길에 받은 편지</h1>
+<div class="rule"></div>
+<p>피곤한 아침에, 루체리가 몰래 두고 간 말들 🍓</p>
+</section>
+<article class="card">
+<p>루체리 이거 언제 몰래 쓰고 간 거야 ㅋㅋㅋㅋ</p>
+<p>오늘 아침에 출근하면서 봤는데, 나 오늘 좀 피곤했거든.<br>그냥 평소처럼 피곤한 몸 이끌고 출근하고 있었는데 이거 발견하고 하나씩 읽다 보니까 나도 모르게 웃고 있더라 🍓</p>
+<p>아침부터 이렇게 몰래 찾아와서 글 남겨놓는 게 어딨어 ㅋㅋㅋ<br>덕분에 출근길에 기분도 좋아지고 생각보다 힘도 많이 났어. ♥️</p>
+<p>근데 문제가 하나 있음.</p>
+<div class="broadcast">방송 9시잖아.</div>
+<p>사람 아침부터 이렇게 기분 좋게 만들어놓고 9시까지 어떻게 기다리라는 거야 루체리 💀ㅋㅋㅋㅋ</p>
+<p>안 그래도 요즘 진짜 루첼 방송 언제 켜나 엄청 기다리고 있는데 말이지.</p>
+<p>나 원래 뭔가 하나에 빠지면 한동안 그것만 보는 스타일이긴 해.<br>근데 생각해보니까 다른 방송 볼 때는 이렇게까지 기다려본 적은 별로 없는 것 같아.</p>
+<p>예전에는 다른 방송 같은 것도 그냥<br>“어? 켜져 있네?”<br>하고 들어가서 조금 보고 그런 느낌이었다면,</p>
+<p>요즘은 그냥 아침부터<br>“아 루체리 방송 보고 싶다.”<br>“오늘 언제 오지?”<br>이러고 있음 ㅋㅋㅋㅋ</p>
+<p>방송 시간이 9시든 다른 시간이든 슬슬 시간 가까워지면 계속 생각나고, 알림 뜨면 괜히 반갑고.</p>
+<p>그러니까 루체리가 매일매일 내가 보러 와주는 게 선물 같다고 했는데 🍓<br>사실 나한테도 요즘 루첼 방송이 그런 느낌인 것 같아.</p>
+<p>하루 보내고 방송 찾아가서 루체리랑 골골이들이랑 떠들고, 서로 장난치고, 루체리 놀렸다가 또 웃고ㅋㅋㅋ 그런 시간이 요즘 되게 기다려져.</p>
+<p>물론 게임하는 것도 좋고 노래하는 것도 좋은데, 나는 역시 루체리랑 골골이들이 티키타카하면서 노는 거랑 그냥 이런저런 얘기하면서 소통하는 시간이 제일 좋은 것 같아.</p>
+<p>그리고 루체리가 나에 대해서 하나 알아갔다고 좋아하는 것도 좀 신기했어 ㅋㅋㅋ</p>
+<p>나는 요즘 방송 보면서 루체리에 대해서 내가 몰랐던 거 하나씩 나올 때마다 맨날<br>“오늘도 새로운 것을 알게 되었네요.”<br>이러고 있었잖아? 💀</p>
+<p>처음에는 그냥 장난처럼 시작한 말이었는데, 사실 요즘은 진짜 그런 느낌이야.</p>
+<p>하나 알고, 또 하나 알고.<br>“아 루체리는 이런 걸 좋아하는구나.”<br>“이럴 때 이런 반응을 하는구나.”<br>“아ㅋㅋㅋ 이건 진짜 싫어하는구나.”<br>하면서 하나씩 알아가는 게 재밌거든.</p>
+<p>근데 이번에는 반대로 루체리가<br>“나도 하늘길님에 대해서 하나 알아갔다.”<br>하고 좋아하고, 마지막에는 아예 자기도 나를 알아갈 기회를 달라고 하니까...</p>
+<p>음...</p>
+<div class="heartline"><span class="redacted" tabindex="0">생각보다 그 말이 되게 좋았어. ♥️</span></div>
+<p>내가 루체리를 알아가는 것만 즐거워하고 있었는데, 루체리도 나라는 사람을 궁금해하고 알아가고 싶어 한다는 거잖아.</p>
+<div class="secret-divider">ABOUT 하늘길</div><p>그러니까 기회를 달라고 했으니 조금 알려주자면ㅋㅋㅋ</p>
+<p>나는 원래 꽤 조용한 편이야.</p>
+<p>낯을 가릴 때도 있고 안 가릴 때도 있는데 첫인상이나 사람에 따라서 좀 다른 것 같고, 말 많은 것도 마찬가지고.</p>
+<p>대신 친해졌다고 느끼면 말도 많아지고 장난도 엄청 많아지는 타입이야. 그리고 그 사람한테 표현하는 것도 훨씬 적극적으로 변하는 편이고.</p>
+<p>...그러니까 요즘 방송에서 내가 점점 말 많아지고 장난치는 게 늘어나는 것 같다면?</p>
+<p><span class="redacted" tabindex="0">뭐... 그런 뜻인가 보지 루체리? 🍓ㅋㅋㅋ</span></p>
+<p>그리고 게임 좋아하는 건 이제 알아버렸으니 말할 것도 없고ㅋㅋ<br>스팀 게임이 500개 가까이 있어서 몇몇 장르 빼면 진짜 이것저것 다 하는 편이야.</p>
+<p>공포게임은 별로 안 좋아하지만 💀<br>이건 굳이 알아냈다고 공포게임 시키라는 뜻 아닙니다.</p>
+<p>음식도 거의 안 가리는데 마라탕 좋아하고, 해산물이나 초밥도 좋아하고, 의외로 고기보다 채소를 더 좋아해.</p>
+<p>샤브샤브 먹으러 가면 고기는 별로 안 가져오고 채소만 계속 리필해서 먹는 인간임ㅋㅋㅋㅋ</p>
+<p>음악은 취향 설명하기가 제일 어려운데 특정 장르를 좋아한다기보다는 그냥 듣다가 하나 꽂히면 그것만 계속 듣는 편이고.</p>
+<p>생각해보니까 이것도 뭔가에 빠지면 그것만 보는 거랑 똑같네 ㅋㅋㅋ</p>
+<p>그러니까 루체리도 앞으로 천천히 하나씩 알아가면 되지 않을까.</p>
+<p>나도 계속 루체리 알아가는 중이니까 🍓♥️</p>
+<p>아 그리고 어제 방송에서 새롭게 뭘 알아갔냐고 물어봤지?</p>
+<p>뿡뿡뿡뿡뿡은...</p>
+<p>나도 모르겠어.</p>
+<p>그건 내가 루체리한테 다시 물어봐야 할 것 같은데?ㅋㅋㅋㅋ 💀</p>
+<p>대신 어제는 소통도 재밌었고 종겜 핀볼 하는 것도 재밌게 봤어.</p>
+<p>루체리가 좋아할 것 같은 게임들로 나름 추천해봤는데 정작 다른 게임들이 걸려버린 건 좀 아쉽긴 했지만ㅋㅋㅋ 그래도 하나하나 조금씩 앞으로 나아가는 거 보고 있으니까 괜히 나까지 응원하게 되더라.</p>
+<p>그리고 중간중간 열심히 올라가다가 다시 떨어졌을 때...<br>갑자기 침울해진 루체리 표정 있잖아.</p>
+<p>미안한데...</p>
+<div class="cute">그거 귀여웠음.</div>
+<p>열심히 하고 있는데 떨어진 사람한테 할 말은 아닌 것 같지만 귀여운 걸 어떡해 💀ㅋㅋㅋㅋ</p>
+<p>그리고 루체리가 내가 방송에 재미있는 종겜 많이 넣어줘서 고맙다고 했는데, 나도 루체리가 재밌게 할 만한 거 찾는 게 은근 재밌어.</p>
+<p>내가 추천한 걸 루체리가 보고 재밌어하거나 관심 가지면 그것도 좋고.<br>그러니까 앞으로도 종종 가져올게 🍓</p>
+<p>아무튼 처음에는 그냥 아침 출근길에 짧게 답장하려고 했는데...</p>
+<p>루체리가 나 알아갈 기회 달라며.</p>
+<p>그래서 진짜 기회 줬더니 이렇게 길어졌네?ㅋㅋㅋㅋ</p>
+<p>근데 아침부터 이런 글 남겨줘서 진짜 고마워 루체리.</p>
+<p>오늘 피곤한 상태로 출근하고 있었는데 루체리가 몰래 찾아와서 남겨놓은 거 읽으면서 웃었고, 덕분에 진짜 힘도 났어. ♥️</p>
+<p>그리고 루체리가 매일 내가 오기를 기다린다고 했잖아.</p>
+<div class="wait"><span class="redacted" tabindex="0">나도 기다리고 있어.</span></div>
+<div class="wait small">생각보다 많이.</div>
+<p>오늘도 아마 하루 보내면서 몇 번은<br>“아 루체리 방송 언제 하지...”<br>하고 있을 것 같아ㅋㅋㅋ</p>
+<p>그러니까 9시에 보자 루체리 🍓💀♥️<br>그때까지 열심히 일하고 있을게.</p>
+<p>아, 그리고 앞으로도 내가 모르는 거 하나씩 튀어나오면 당연히 말해줄 거야.</p>
+<p>“오늘도 루체리에 대해서 새로운 것을 알게 되었네요.”</p>
+<p>대신 이제부터는 루체리 차례도 있는 거다?</p>
+<div class="final">그러니까 나도 루체리 하나씩 알아갈 테니까<br>루체리도 나 하나씩 알아가 봐 🍓♥️</div>
+<div class="photo"><img src="ruchel-night.jpeg" alt="루첼 이미지"></div>
+<div class="caption">오늘도 루체리에 대해서 새로운 것을 알게 되었네요. 🍓💀</div>
+<div class="sign">From. 하늘길</div>
+<div class="ghost">💀 ♥️ 🍓</div>
+</article>
+</main>
+
+<script>
+const intro=document.getElementById('secretIntro'), env=document.getElementById('envelope');
+function openLetter(){
+ if(env.classList.contains('open')) return;
+ env.classList.add('open');
+ setTimeout(()=>{
+   intro.classList.add('opened');
+   document.body.classList.remove('locked');
+   document.body.classList.add('ready');
+   setTimeout(()=>intro.remove(),1000);
+ },1500);
+}
+env.addEventListener('click',openLetter);
+env.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openLetter()}});
+
+const targets=[...document.querySelectorAll('.card > p,.card > blockquote,.card > .broadcast,.card > .heartline,.card > .cute,.card > .wait,.card > .final,.photo,.caption,.sign,.ghost')];
+const io=new IntersectionObserver(entries=>{
+ entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('seen');io.unobserve(e.target)}})
+},{threshold:.13,rootMargin:'0px 0px -7% 0px'});
+targets.forEach(el=>io.observe(el));
+
+// Tiny ambient strawberry/skull/heart motes
+['🍓','💀','♥'].forEach((sym,j)=>{
+ for(let i=0;i<3;i++){
+  const el=document.createElement('span'); el.className='floating-symbol'; el.textContent=sym;
+  el.style.left=(8+j*31+i*9)+'%'; el.style.fontSize=(12+i*3)+'px';
+  el.style.animationDuration=(13+j*2+i*3)+'s'; el.style.animationDelay=(-i*4-j*2)+'s';
+  document.body.appendChild(el);
+ }
+});
+
+// Deluxe: tap-to-reveal ink
+document.querySelectorAll('.redacted').forEach(el=>{
+ const reveal=()=>el.classList.add('revealed');
+ el.addEventListener('click',reveal);
+ el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();reveal()}});
+});
+
+// Reading progress
+const progress=document.getElementById('progress');
+addEventListener('scroll',()=>{
+ const max=document.documentElement.scrollHeight-innerHeight;
+ progress.style.width=(max>0?(scrollY/max)*100:0)+'%';
+},{passive:true});
+
+// "9시잖아" shakes once when revealed
+const bc=document.querySelector('.broadcast');
+if(bc){
+ const shakeObs=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){setTimeout(()=>e.target.classList.add('shake-now'),380);shakeObs.disconnect()}
+ }),{threshold:.65});
+ shakeObs.observe(bc);
+}
+
+// Ending strawberry/skull/heart burst once
+const finalEl=document.querySelector('.final');
+const burst=document.getElementById('endBurst');
+let burstDone=false;
+function fireEnding(){
+ if(burstDone) return; burstDone=true;
+ const syms=['🍓','♥','💀','♡','🍓','♥','♡','🍓','♥'];
+ for(let i=0;i<28;i++){
+  const x=(Math.random()*2-1)*Math.min(innerWidth*.48,420);
+  const y=-(80+Math.random()*innerHeight*.62);
+  const item=document.createElement('span');
+  item.className='burst-item'; item.textContent=syms[i%syms.length];
+  item.style.setProperty('--x',x+'px'); item.style.setProperty('--y',y+'px');
+  item.style.setProperty('--r',((Math.random()*160)-80)+'deg');
+  item.style.animationDelay=(Math.random()*.18)+'s';
+  burst.appendChild(item);
+  setTimeout(()=>item.remove(),2200);
+ }
+ if(navigator.vibrate) navigator.vibrate([20,35,20]);
+}
+if(finalEl){
+ finalEl.addEventListener('click',fireEnding);
+ const endObs=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){setTimeout(fireEnding,700);endObs.disconnect()}
+ }),{threshold:.72});
+ endObs.observe(finalEl);
+}
+
+</script>
+</body>
+</html>
